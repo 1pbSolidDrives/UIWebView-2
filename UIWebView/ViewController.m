@@ -89,38 +89,39 @@
             
             
             
-//            NSString *lJs = @"document.documentElement.innerHTML";
+            NSString *lJs = @"document.documentElement.innerHTML";
 //            NSString *lJs2 = @"document.title";
 //            NSString *urlcode = @"document.URL";
 //            NSString *url = [_completeView stringByEvaluatingJavaScriptFromString:urlcode];
-//            NSString *lHtml1 = [_completeView stringByEvaluatingJavaScriptFromString:lJs];
 //            NSString *pattern = @"\"big-price\">([0-9]+)<\/span>";
 
             //创建js代码
-            
-            
-            NSString* jsCode3_5=@"var regxStr = /\"big-price\">([0-9]+)<\/span>/;";
-            NSString* jsCode4=@"var reg = new RegExp(regxStr, 'g');";
-            NSString* jsCode5=@"var allHtml = $('body').html();";
-            NSString* jsCode6=@"var result = new Array();result = reg.exec(allHtml);";
-            
+//            
+//            
+//            NSString* jsCode3_5=@"var regxStr = '\"big-price\">([0-9]+)<';";
+//            NSString* jsCode4=@"var reg = new RegExp(regxStr, 'g');";
+//            NSString* jsCode6=@"var result = new Array();result = reg.exec(allHtml);";
+//            
+//            
+
             
             NSString* jsCode1=@"var script = document.createElement('script');";
             NSString* jsCode2=@"script.type = 'text/javascript';";
             NSString* jsCode3=@"script.text = \"function myFunction(){";
-            NSString* jsCode7=@"alert('1111');";
+            NSString* jsCode4=@"var price = $('.big-price').text();";
+            NSString* jsCode7=@"return (price);";
             NSString* jsCode8=@"}\";";
             NSString* jsCode9=@"document.getElementsByTagName('body')[0].appendChild(script);";
 //            
 //            NSString* jsCode = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@",jsCode1,jsCode2,jsCode3,jsCode3_5,jsCode4,jsCode5,jsCode6,jsCode6_5,jsCode7,jsCode8,jsCode9];
             
-            NSString* jsCodeBase = [NSString stringWithFormat:@"%@%@%@%@%@%@",jsCode1,jsCode2,jsCode3,jsCode7,jsCode8,jsCode9];
+            NSString* jsCodeBase = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",jsCode1,jsCode2,jsCode3,jsCode4,jsCode7,jsCode8,jsCode9];
 
             
             //注入js代码
             
             
-            
+            NSString* regx = @"'/\\\"big-price\">([0-9]+)<\\/span>/'";
             
             
             
@@ -129,6 +130,8 @@
             NSString* runJsCode = [NSString stringWithFormat:@"myFunction()"];
             NSString* priceResult = [_completeView stringByEvaluatingJavaScriptFromString:runJsCode];
             
+            NSString *lHtml1 = [_completeView stringByEvaluatingJavaScriptFromString:lJs];
+
             NSLog(@"reslut = %@",priceResult);
             
 //            NSString* addParameter = [NSString stringWithFormat:@"getMyWord('%@');",pattern ];
