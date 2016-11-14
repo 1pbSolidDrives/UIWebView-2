@@ -134,56 +134,45 @@
 
             NSLog(@"reslut = %@",priceResult);
             
-//            NSString* addParameter = [NSString stringWithFormat:@"getMyWord('%@');",pattern ];
-//            NSString* price = [_completeView stringByEvaluatingJavaScriptFromString:addParameter];
-//            //正则表达式对象
-//            NSError *error;
-//
-//            NSString* test = @"<span class=\"big-price\">7488</span>";
-//            NSString* regex = @"(w+)";
-//            NSArray  *splitArray   = NULL;
-//  
-//            // splitArray == { @"This", @"is", @"neat." }
-//            NSLog(@"splitArray: %@", splitArray);
-//            NSRegularExpression *regexl = [NSRegularExpression regularExpressionWithPattern:regex options:NSRegularExpressionCaseInsensitive error:nil];
+    //正则表达式方式
+            //创建js代码
+            
 //            
-//            NSArray * matches = [regexl matchesInString:test options:0 range:NSMakeRange(0, [test length])];
-//           
-//            NSMutableArray *array = [NSMutableArray array];
-//            NSString *checkString = @"<span class=\"big-price\">7488</span>";
-//            //1.创建正则表达式，[0-9]:表示‘0’到‘9’的字符的集合
-//            //1.1将正则表达式设置为OC规则
-//            NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
-//            //2.利用规则测试字符串获取匹配结果
-//            NSArray *results = [regular matchesInString:lHtml1 options:0 range:NSMakeRange(0, lHtml1.length)];
-//            NSLog(@"%ld %@",results.count,results);
-//            for (NSTextCheckingResult *result in results) {
-//                NSLog(@"%@ %@",NSStringFromRange(result.range),[test substringWithRange:result.range]);
-//            }
-//            //需要被筛选的字符串
-//            NSString *str = @"#今日要闻#[偷笑] http://asd.fdfs.2ee/aas/1e @sdf[test] #你确定#@rain李23: @张三[挖鼻屎]m123m";
-//            //表情正则表达式
-//            //  \\u4e00-\\u9fa5 代表unicode字符
-//            NSString *emopattern = @"\\[[a-zA-Z\\u4e00-\\u9fa5]+\\]";
-//            //@正则表达式
-//            NSString *atpattern = @"@[0-9a-zA-Z\\u4e00-\\u9fa5]+";
-//            //#...#正则表达式
-//            NSString *toppattern = @"#[0-9a-zA-Z\\u4e00-\\u9fa5]+#";
-//            //url正则表达式
-//            NSString *urlpattern = @"\\b(([\\w-]+://?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|/)))";
-//            //设定总的正则表达式
-//            NSString *pattern2 = [NSString stringWithFormat:@"%@|%@|%@|%@",emopattern,atpattern,toppattern,urlpattern];
-//            //根据正则表达式设定OC规则
-//            NSRegularExpression *regular2 = [[NSRegularExpression alloc] initWithPattern:pattern2 options:NSRegularExpressionCaseInsensitive error:nil];
-//            //获取匹配结果
-//            NSArray *results2 = [regular2 matchesInString:str options:0 range:NSMakeRange(0, str.length)];
-//            //NSLog(@"%@",results);
-//            //遍历结果
-//            for (NSTextCheckingResult *result in results2) {
-//                NSLog(@"%@ %@",NSStringFromRange(result.range),[str substringWithRange:result.range]);
-//            }
+//            NSString* jsCode3_5=@"var regxStr = '\"big-price\">([0-9]+)<';";
+//            NSString* jsCode4=@"var reg = new RegExp(regxStr, 'g');";
+//            NSString* jsCode5=@"var allHtml = $('body').html();";
+//            NSString* jsCode6=@"var result = new Array();result = reg.exec(allHtml);";
 //            
-
+//            
+//            NSString* jsCode1=@"var script = document.createElement('script');";
+//            NSString* jsCode2=@"script.type = 'text/javascript';";
+//            NSString* jsCode3=@"script.text = \"function myFunction(regxStr){";
+//            
+//            NSString* jsCode7=@"alert (result);";
+//            NSString* jsCode8=@"}\";";
+//            NSString* jsCode9=@"document.getElementsByTagName('body')[0].appendChild(script);";
+//            //
+//            //            NSString* jsCode = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@",jsCode1,jsCode2,jsCode3,jsCode3_5,jsCode4,jsCode5,jsCode6,jsCode6_5,jsCode7,jsCode8,jsCode9];
+//            
+//            NSString* jsCodeBase = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",jsCode1,jsCode2,jsCode3,jsCode4,jsCode5,jsCode6,jsCode7,jsCode8,jsCode9];
+//            
+//            
+//            //注入js代码
+//            
+//            
+//            NSString* regx = @"/\\\"big-price\">([0-9]+)<\\/span>/";
+//            
+//            
+//            
+//            [_completeView stringByEvaluatingJavaScriptFromString:jsCodeBase];
+//            //调用注入的代码
+//            NSString* runJsCode = [NSString stringWithFormat:@"myFunction(%@)",regx];
+//            NSString* priceResult = [_completeView stringByEvaluatingJavaScriptFromString:runJsCode];
+//            
+//            NSLog(@"reslut = %@",priceResult);
+//            
+            
+            
 
         }
             break;
